@@ -1,0 +1,38 @@
+pwd="`pwd`"
+cd ~/bit_coin
+echo "" > bitcoin.html
+if [[ $1 == "-u" ]] || [[ $2 == "-u" ]]
+then
+	var1="US"
+	curl -s https://finance.yahoo.com/quote/BTC-USD/ >> bitcoin.html
+elif [[ $1 == "-c" ]] || [[ $2 == "-c" ]]
+then
+	var1="CA"
+	curl -s https://finance.yahoo.com/quote/BTC-CAD/ >> bitcoin.html
+elif [[ $1 == "-h" ]] || [[ $2 == "-h" ]] || [[ $1 == "--help" ]] || [[ $2 == "--help" ]]
+then
+	echo "		==BITCOIN=="
+	echo "-I = only print the current value"
+	echo "-u = prints the value in US dollars"
+	echo "-c = prints the value in CA dollars"
+	cd $pwd
+	exit 15
+else
+	echo "ERROR: no operander was supplyed"
+	echo "For more information use operander --help"
+	cd $pwd
+	exit 15
+fi
+cat bitcoin.html | tr "}" "\n" > bitcoin2.html
+grep -F "span class=\"Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)\" data-reactid=\"32\"" bitcoin2.html > bitcoin3.html
+cat bitcoin3.html | tr "<" "\n" > bitcoin4.html
+grep -F "span class=\"Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)\" data-reactid=\"32\"" bitcoin4.html > bitcoin5.html
+cat bitcoin5.html | tr ">" "\n" >> bitcoin5.html
+
+if [[ $1 == "-I" ]] || [[ $2 == "-I" ]]
+then
+	tail -1 bitcoin5.html
+else
+	echo "The current value of bitcoin in $var1 is `tail -1 bitcoin5.html` at `date`"
+fi
+cd $pwd
