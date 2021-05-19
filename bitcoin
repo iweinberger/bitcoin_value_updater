@@ -10,8 +10,10 @@ then
 elif [[ $1 == "-h" ]] || [[ $2 == "-h" ]] || [[ $1 == "--help" ]] || [[ $2 == "--help" ]]
 then
 	echo "		==BITCOIN=="
-	echo "-I = only print the current value"
-	echo "-u = prints the value in US dollars"
+	echo "bitcoin [OPTION] [CURRENCY]"
+	echo "-I = only print the current value."
+	echo "-u = outputs the value in US dollars."
+	echo "-c = outputs the value of bitcoin in CA dollars.
 	rm bitcoin.html
 	exit 15
 else

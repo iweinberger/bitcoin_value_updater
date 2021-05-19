@@ -1,0 +1,1 @@
+To start using this package please go to your .git directory (by using "cd ~/.git" command) and from there go to your bitcoin-value-updater directory (cd bitcoin-value-updater) and run the START.sh file (with "sh START.sh). if you are haveing trouble use "bitcoin --help".
