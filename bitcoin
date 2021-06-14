@@ -1,30 +1,30 @@
 echo "" > bitcoin.html
 if [[ $1 == "-u" ]] || [[ $2 == "-u" ]]
 then
-	var1="US"
-	curl -s https://finance.yahoo.com/quote/BTC-USD/ >> bitcoin.html
+        var1="US"
+        curl -s https://finance.yahoo.com/quote/BTC-USD/ >> bitcoin.html
 elif [[ $1 == "-c" ]] || [[ $2 == "-c" ]]
 then
-	var1="CA"
-	curl -s https://finance.yahoo.com/quote/BTC-CAD/ >> bitcoin.html
+        var1="CA"
+        curl -s https://finance.yahoo.com/quote/BTC-CAD/ >> bitcoin.html
 elif [[ $1 == "-h" ]] || [[ $2 == "-h" ]] || [[ $1 == "--help" ]] || [[ $2 == "--help" ]]
 then
-	echo "		==BITCOIN=="
-	echo "bitcoin [OPTION] [CURRENCY]"
-	echo "-I = only print the current value."
-	echo "-u = outputs the value in US dollars."
-	echo "-c = outputs the value of bitcoin in CA dollars.
-	rm bitcoin.html
-	exit 15
+        echo "          ==BITCOIN=="
+        echo "bitcoin [OPTION] [CURRENCY]"
+        echo "-I = only print the current value."
+        echo "-u = outputs the value in US dollars."
+        echo "-c = outputs the value of bitcoin in CA dollars."
+        rm bitcoin.html
+        exit 15
 else
-	if [[ $1 == "" ]] || [[ $1 == " " ]]; then
-		echo "ERROR: no operander was supplyed"
-		echo "For more information use command bitcoin --help or bitcoin -h."
-	else
-		echo "ERROR: operander(s) $1 $2 $3 $4 not found"
-		echo "for more information use commands \"bitcoin --help\" or \"bitcoin -h\"."
-	fi
-	exit 15
+        if [[ $1 == "" ]] || [[ $1 == " " ]]; then
+                echo "ERROR: no operander was supplyed"
+                echo "For more information use command bitcoin --help or bitcoin -h."
+        else
+                echo "ERROR: operander\s $1 $2 $3 $4 not found"
+                echo "for more information use commands \"bitcoin --help\" or \"bitcoin -h\"."
+        fi
+        exit 15
 fi
 cat bitcoin.html | tr "}" "\n" > bitcoin2.html
 grep -F "span class=\"Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)\" data-reactid=\"32\"" bitcoin2.html > bitcoin3.html
@@ -34,8 +34,8 @@ cat bitcoin5.html | tr ">" "\n" > bitcoin6.html
 
 if [[ $1 == "-I" ]] || [[ $2 == "-I" ]]
 then
-	tail -1 bitcoin6.html
+        tail -1 bitcoin6.html
 else
-	echo "The current value of bitcoin in $var1 is `tail -1 bitcoin6.html` at `date`"
+        echo "The current value of bitcoin in $var1 is `tail -1 bitcoin6.html` at `date`"
 fi
 rm bitcoin.html bitcoin2.html bitcoin3.html bitcoin4.html bitcoin5.html bitcoin6.html
