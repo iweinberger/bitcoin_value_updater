@@ -1,4 +1,4 @@
-o "" > bitcoin.html
+echo "" > bitcoin.html
 if [[ $1 == "-u" ]] || [[ $2 == "-u" ]]
 then
         var1="US"
@@ -31,11 +31,17 @@ grep -F "span class=\"Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)\" data-reactid=\
 cat bitcoin3.html | tr "<" "\n" > bitcoin4.html
 grep -F "span class=\"Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)\" data-reactid=\"32\"" bitcoin4.html > bitcoin5.html
 cat bitcoin5.html | tr ">" "\n" > bitcoin6.html
-
+cat bitcoin6.html | tr "." "\n" > bitcoin7.html
+tail -2 bitcoin7.html > bitcoin8.html
+head -1 bitcoin8.html | tr "," "\n" > bitcoin9.html
 if [[ $1 == "-I" ]] || [[ $2 == "-I" ]]
 then
-        tail -1 bitcoin6.html
+        echo -n "`head -1 bitcoin9.html`" ; echo "`tail -1 bitcoin9.html`"
 else
-        echo "The current value of bitcoin in $var1 is `tail -1 bitcoin6.html` at `date`"
+        echo -n "The current value of bitcoin in $var1 is " ; echo -n "`head -1 bitcoin9.html`" ; echo -n "`tail -1 bitcoin9.html`" ; echo -en " at `date`.\n"
 fi
-rm bitcoin.html bitcoin2.html bitcoin3.html bitcoin4.html bitcoin5.html bitcoin6.html
+if [[ $1 == "-d" ]] || [[ $2 == "-d ]] ||  [[ $3 == "-d ]] || [[ $4 == "-d ]] || [[ $5 == "-d ]]; then
+        gshsgdghd=0
+else
+        rm bitcoin.html bitcoin2.html bitcoin3.html bitcoin4.html bitcoin5.html bitcoin6.html bitcoin7.html bitcoin8.html bitcoin9.html
+fi
